@@ -1,4 +1,4 @@
-package com.myProjects.gameAwards.domain.model.game;
+package com.myProjects.gameAwards.domain.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
