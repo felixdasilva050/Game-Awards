@@ -17,7 +17,7 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private GameRepository gameRepository;
     @Override
-    public List<Game> findall() {
+    public List<Game> findAll() {
         return gameRepository.findAll();
     }
     @Override

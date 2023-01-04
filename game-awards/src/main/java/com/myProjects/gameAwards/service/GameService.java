@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GameService  {
 
-    List<Game> findall();
+    List<Game> findAll();
     Game findById(Long id);
     void create(Game game);
     void update(Game game);
