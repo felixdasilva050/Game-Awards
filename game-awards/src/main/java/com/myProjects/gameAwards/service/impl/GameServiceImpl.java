@@ -6,6 +6,7 @@ import com.myProjects.gameAwards.service.GameService;
 import com.myProjects.gameAwards.service.exception.BusinessException;
 import com.myProjects.gameAwards.service.exception.NoContentException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,12 @@ public class GameServiceImpl implements GameService {
     public List<Game> findAll() {
         return gameRepository.findAll();
     }
+
+    @Override
+    public List<Game> findAllSortByVoteDESC() {
+        return gameRepository.findAll(Sort.by(Sort.Direction.DESC, "vote"));
+    }
+
     @Override
     public Game findById(Long id) {
         Optional<Game> game = gameRepository.findById(id);
@@ -54,5 +61,12 @@ public class GameServiceImpl implements GameService {
         } else {
             throw new BusinessException("Não foi possível localizar o Game");
         }
+    }
+
+    @Override
+    public void updateVote(Long id) {
+        Game gameDB = findById(id);
+        gameDB.setVote(gameDB.getVote()+1);
+        update(gameDB);
     }
 }
