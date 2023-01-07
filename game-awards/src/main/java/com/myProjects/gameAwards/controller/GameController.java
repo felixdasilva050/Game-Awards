@@ -9,13 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class GameController {
+public class GameController extends BaseRestController {
     @Autowired
     private GameService businessLayer;
 
     @GetMapping("games/findAll")
     public ResponseEntity<List<Game>> findAll(){
         List<Game> games = businessLayer.findAll();
+        return ResponseEntity.ok(games);
+    }
+
+    @GetMapping("games/findAll/byVoteDESC")
+    public ResponseEntity<List<Game>> findAllVoteDESC(){
+        List<Game> games = businessLayer.findAllSortByVoteDESC();
         return ResponseEntity.ok(games);
     }
 
@@ -40,5 +46,10 @@ public class GameController {
         return ResponseEntity.ok(game);
     }
 
+    @PatchMapping("game/{id}/vote")
+    public ResponseEntity<Game> updateVote(@PathVariable Long id){
+        businessLayer.updateVote(id);
+        return ResponseEntity.ok().build();
+    }
 
 }
